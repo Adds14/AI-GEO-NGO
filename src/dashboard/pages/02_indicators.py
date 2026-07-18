@@ -13,13 +13,12 @@ st.markdown("View and filter the raw environmental metrics extracted from satell
 
 @st.cache_data
 def load_mock_data():
-    world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
-    africa = world[world.continent == 'Africa'].copy()
     np.random.seed(42)
-    n = len(africa)
+    n = 20
+    region_names = [f"Grid-{i}" for i in range(1, n+1)]
     
     data = {
-        'Region ID': africa['name'].values,
+        'Region ID': region_names,
         'NDVI (Vegetation)': np.random.uniform(0.1, 0.8, n),
         'NDWI (Water)': np.random.uniform(-0.3, 0.5, n),
         'LST (°C)': np.random.uniform(25.0, 45.0, n),
@@ -43,9 +42,7 @@ if search:
 df = df.sort_values(by=sort_by, ascending=False)
 
 st.dataframe(
-    df.style.background_gradient(cmap='viridis', subset=['NDVI (Vegetation)'])
-      .background_gradient(cmap='Blues', subset=['NDWI (Water)'])
-      .background_gradient(cmap='OrRd', subset=['LST (°C)']),
+    df,
     use_container_width=True,
     height=600
 )

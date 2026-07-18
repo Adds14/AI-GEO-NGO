@@ -1,9 +1,9 @@
 """
 FastAPI dependencies.
 """
-from fastapi import Header, HTTPException, Security
+from fastapi import Header, HTTPException
 
-async def verify_api_key(api_key: str = Security(Header(alias="X-API-Key", default=""))):
+async def verify_api_key(api_key: str = Header(alias="X-API-Key", default="")):
     """
     Dependency to verify API Key.
     """
