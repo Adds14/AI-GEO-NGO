@@ -1,32 +1,29 @@
 """
-Streamlit main application entry point.
+Main Streamlit Application Entry Point.
 """
 import streamlit as st
-import sys
-from pathlib import Path
+import os
 
-# Add project root to path
-sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
+st.set_page_config(
+    page_title="AI-GEO-NGO Platform",
+    page_icon="🌍",
+    layout="wide"
+)
 
-from config.settings import settings
+st.title("AI-Enabled Geospatial Decision Support System")
+st.subheader("For Climate-Resilient WASH Planning")
 
-def main():
-    """Main Streamlit app."""
-    st.set_page_config(
-        page_title=settings.APP_NAME,
-        page_icon="🌍",
-        layout="wide",
-        initial_sidebar_state="expanded"
-    )
+st.markdown("""
+Welcome to the AI-GEO-NGO platform. 
 
-    st.title(f"🌍 {settings.APP_NAME}")
-    st.markdown("### AI-Enabled Geospatial Decision Support System")
+This system processes satellite imagery to identify environmental drivers of climate vulnerability and outputs a **WASH Intervention Priority Index** to help prioritize resource allocation.
 
-    with st.sidebar:
-        st.header("Navigation")
-        st.info("Select a page from the sidebar (pages will be added here).")
+### Navigation
+Please use the sidebar on the left to navigate to the different modules.
+- **WASH Priority Map**: The primary GIS Visualization module displaying predictions, regional metrics, and map overlays.
 
-    st.write("Welcome to the dashboard. Please select a module to begin.")
+---
+*Built with Streamlit, Folium, and Google Earth Engine.*
+""")
 
-if __name__ == "__main__":
-    main()
+# Note: Streamlit automatically routes to files in the `pages/` directory.
